@@ -64,7 +64,7 @@ def cal_rdf (x0, x1, x2, x3, x4):
     sys.density['polymer'] = (1-phi)*eta/sys.diameter.volume['polymer']
     sys.density['particle'] = phi*eta/sys.diameter.volume['particle']
     
-    sys.omega['polymer','polymer'] = pyPRISM.omega.FreelyJointedChain(length=N,l=l=4.0*d/3.0)
+    sys.omega['polymer','polymer'] = pyPRISM.omega.FreelyJointedChain(length=N,l=4.0*d/3.0)
     sys.omega['polymer','particle'] = pyPRISM.omega.NoIntra()
     sys.omega['particle','particle'] = pyPRISM.omega.SingleSite()
     
