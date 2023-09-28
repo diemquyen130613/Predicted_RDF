@@ -88,8 +88,9 @@ def cal_rdf (x0, x1, x2, x3, x4):
     data_df = pd.DataFrame(gr_results)
     return data_df
 
-st.title('nanoNET: machine learning platform for predicting nanoparticles distribution in a polymer matrix')
-
+st.title('Predicting nanoparticles distribution in a polymer matrix')
+st.sidebar.title('Predicting nanoparticles distribution')
+st.siderbar.header('Problem')
 st.header('Problem')
 col1, col2 = st.columns([3,3])
 with col1: 
@@ -97,7 +98,9 @@ with col1:
 with col2: 
     st.image('image2.png')
 
+st.siderbar.header('Prediction')
 st.header('Prediction')
+st.siderbar.subheader('Select parameters')
 st.subheader('Select parameters')
 col0, col1, col2, col3, col4 = st.columns(5)
 with col0:
@@ -124,7 +127,6 @@ if btn:
     X = np.array(X)
     rdf_predict = loaded_rf.predict(X)
     
-    #rdf = pd.DataFrame({'$r/\sigma$': X_5.T.iloc[0], 'Predicted RDF': rdf_predict})
     rdf = pd.DataFrame({'r/sigma': actual_rdf.T.iloc[0], 'Actual RDF' : actual_rdf.T.iloc[1], 'Predicted RDF': rdf_predict})
 
     st.subheader('Predict RDF of polymer')
@@ -147,7 +149,7 @@ if btn:
     #ax.set_ylim([-1,15])
     plt.tick_params(direction = 'in')
 
-    plt.xlabel(r'$r/\sigma$')
+    plt.xlabel(r'r/\sigma')
     plt.ylabel('g(r)')
 
     #chú thích
