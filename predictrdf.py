@@ -95,7 +95,8 @@ with col1:
     st.image('image1.png')
 with col2: 
     st.image('image2.png')
-    
+st.write(' The distribution of nanocomposites (PNC) in a polymer matix  depending on various factors,  including nano–polymer (NP-P) interaction, nano-nano (NP-P) interaction , diameter of an NP (D), density (Phi) and chain length of polymers (N). We calculate and predict the distribution of nano in a polymer matrix by the radial distribution function (RDF).')
+
 st.header('Prediction')
 st.subheader('Select parameters')
 col0, col1, col2, col3 = st.columns([1, 1, 2, 1])
