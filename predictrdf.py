@@ -109,7 +109,7 @@ with col0:
     X_2 = st.number_input('D', 2, 5)
     X_3 = st.number_input('$Phi*10^{-3}$', 1, 5)
     X_4 = st.number_input('N', 25, 40)
-with col1:
+with col2:
     st.image('image3.png')
     st.image('image4.png')
 
