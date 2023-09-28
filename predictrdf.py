@@ -102,14 +102,14 @@ st.sidebar.header('Prediction')
 st.header('Prediction')
 st.sidebar.subheader('Select parameters')
 st.subheader('Select parameters')
-col0, col1, col2, col3, col4 = st.columns(5)
+col0, col1 = st.columns([1, 4])
 with col0:
     X_0 = st.number_input('NP-polymers', 0.3, 1.5)
     X_1 = st.number_input('NP-NP', 0.3, 1.5)
     X_2 = st.number_input('D', 2, 5)
     X_3 = st.number_input('$Phi*10^{-3}$', 1, 5)
     X_4 = st.number_input('N', 25, 40)
-with col1, col2, col3, col4:
+with col1:
     st.image('image3.png')
     st.image('image4.png')
 
