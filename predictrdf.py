@@ -144,7 +144,7 @@ if btn:
 
     ax = plt.gca()
     ax.set_xlim([1,10])
-    ax.set_ylim([-1,15])
+    #ax.set_ylim([-1,15])
     plt.tick_params(direction = 'in')
 
     plt.xlabel(r'$r/\sigma$')
