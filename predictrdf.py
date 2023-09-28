@@ -90,7 +90,7 @@ def cal_rdf (x0, x1, x2, x3, x4):
 
 st.title('Predicting nanoparticles distribution in a polymer matrix')
 st.sidebar.title('Predicting nanoparticles distribution')
-st.siderbar.header('Problem')
+st.sidebar.header('Problem')
 st.header('Problem')
 col1, col2 = st.columns([3,3])
 with col1: 
@@ -98,10 +98,11 @@ with col1:
 with col2: 
     st.image('image2.png')
 
-st.siderbar.header('Prediction')
+st.sidebar.header('Prediction')
 st.header('Prediction')
-st.siderbar.subheader('Select parameters')
+st.sidebar.subheader('Select parameters')
 st.subheader('Select parameters')
+st.sidebar.subheader('Select parameters')
 col0, col1, col2, col3, col4 = st.columns(5)
 with col0:
     X_0 = st.number_input('NP-polymers', 0.1, 1.5)
@@ -111,6 +112,7 @@ with col0:
     X_4 = st.number_input('N', 25, 40)
     
 btn = st.button('Calculater')
+st.sidebar.button('Calculater')
 if btn:
     actual_rdf = cal_rdf(X_0, X_1, X_2, X_3/(1000), X_4)
     X_5 = actual_rdf.T.iloc[0]
