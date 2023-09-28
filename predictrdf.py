@@ -104,12 +104,15 @@ st.sidebar.subheader('Select parameters')
 st.subheader('Select parameters')
 col0, col1, col2, col3, col4 = st.columns(5)
 with col0:
-    X_0 = st.number_input('NP-polymers', 0.2, 1.5)
-    X_1 = st.number_input('NP-NP', 0.2, 1.5)
+    X_0 = st.number_input('NP-polymers', 0.3, 1.5)
+    X_1 = st.number_input('NP-NP', 0.3, 1.5)
     X_2 = st.number_input('D', 2, 5)
     X_3 = st.number_input('$Phi*10^{-3}$', 1, 5)
     X_4 = st.number_input('N', 25, 40)
-    
+with col1, col2, col3, col4:
+    st.image('image3.png')
+    st.image('image4.png')
+
 btn = st.button('Calculater')
 if btn:
     actual_rdf = cal_rdf(X_0, X_1, X_2, X_3/(1000), X_4)
@@ -149,7 +152,7 @@ if btn:
     #ax.set_ylim([-1,15])
     plt.tick_params(direction = 'in')
 
-    plt.xlabel(r'r/\sigma')
+    plt.xlabel(r'r/sigma')
     plt.ylabel('g(r)')
 
     #chú thích
