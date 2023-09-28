@@ -106,12 +106,11 @@ with col0:
     X_2 = st.number_input('D', 2, 5)
     X_3 = st.number_input('$Phi*10^{-3}$', 1, 5)
     X_4 = st.number_input('N', 25, 40)
-X_5 = pd.read_csv("x5.csv")
     
 btn = st.button('Calculater')
 if btn:
     actual_rdf = cal_rdf(X_0, X_1, X_2, X_3/(1000), X_4)
-    
+    X_5 = actual_rdf.T.iloc[0]
     #load model
     loaded_rf = joblib.load("my_rf.pkl")
         
