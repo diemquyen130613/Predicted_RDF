@@ -90,75 +90,75 @@ def cal_rdf (x0, x1, x2, x3, x4):
 
 st.title('Predicting nanoparticles distribution in a polymer matrix')
 st.sidebar.title('Predicting nanoparticles distribution')
-st.sidebar.header('Problem')
-st.header('Problem')
-col1, col2 = st.columns([3,3])
-with col1: 
-    st.image('image1.png')
-with col2: 
-    st.image('image2.png')
+with st.sidebar.header('Problem'):
+    st.header('Problem')
+    col1, col2 = st.columns([3,3])
+    with col1: 
+        st.image('image1.png')
+    with col2: 
+        st.image('image2.png')
 
-st.sidebar.header('Prediction')
-st.header('Prediction')
-st.sidebar.subheader('Select parameters')
-st.subheader('Select parameters')
-col0, col1, col2, col3 = st.columns([1, 1, 2, 1])
-with col0:
-    X_0 = st.number_input('NP-polymers', 0.3, 1.5)
-    X_1 = st.number_input('NP-NP', 0.3, 1.5)
-    X_2 = st.number_input('D', 2, 5)
-    X_3 = st.number_input('$Phi*10^{-3}$', 1, 5)
-    X_4 = st.number_input('N', 25, 40)
-with col2:
-    st.image('image3.png')
-    st.image('image4.png')
-
-btn = st.button('Calculater')
-if btn:
-    actual_rdf = cal_rdf(X_0, X_1, X_2, X_3/(1000), X_4)
-    X_5 = actual_rdf.T.iloc[0]
-    #load model
-    loaded_rf = joblib.load("my_rf.pkl")
+with st.sidebar.header('Prediction'):
+    st.header('Prediction')
+    with st.sidebar.subheader('Select parameters'):
+        st.subheader('Select parameters')
+        col0, col1, col2, col3 = st.columns([1, 1, 2, 1])
+        with col0:
+            X_0 = st.number_input('NP-polymers', 0.3, 1.5)
+            X_1 = st.number_input('NP-NP', 0.3, 1.5)
+            X_2 = st.number_input('D', 2, 5)
+            X_3 = st.number_input('$Phi*10^{-3}$', 1, 5)
+            X_4 = st.number_input('N', 25, 40)
+        with col2:
+            st.image('image3.png')
+            st.image('image4.png')
         
-    X = []
-    for j in range (len(X_5)):
-        X.append([X_0, X_1, X_2, X_3/(1000), X_4])
-
-    X = pd.DataFrame(X)
-    X['r/sigma'] = X_5
-
-    X = np.array(X)
-    rdf_predict = loaded_rf.predict(X)
-    
-    rdf = pd.DataFrame({'r/sigma': actual_rdf.T.iloc[0], 'Actual RDF' : actual_rdf.T.iloc[1], 'Predicted RDF': rdf_predict})
-
-    st.subheader('RDF of polymer')
-    st.dataframe(rdf)
-
-    @st.cache_data 
-    def convert_df(df):
-        return df.to_csv(index=False).encode('utf-8')
-    
-    csv = convert_df(rdf)
-    st.download_button(label = 'Download predict rdf', data = csv, file_name = 'rdf.csv', mime = 'text/csv', key = 'download-csv')
-
-    st.subheader('Plot RDF')
-    fig, ax = plt.subplots(figsize=(4,4))
-    plt.plot(rdf.T.iloc[0], rdf.T.iloc[1], 'cyan', linestyle='-', linewidth=2, marker='', label=f'Actual RDF')
-    plt.plot(rdf.T.iloc[0], rdf.T.iloc[2],'r', linestyle='--', linewidth=2, marker='', label=f'Predicted RDF')
-
-    ax = plt.gca()
-    ax.set_xlim([1,10])
-    #ax.set_ylim([-1,15])
-    plt.tick_params(direction = 'in')
-
-    plt.xlabel(r'r/sigma')
-    plt.ylabel('g(r)')
-
-    #chú thích
-    legend = plt.legend(title='', loc='best')
-    legend.get_title().set_multialignment('center')
-    plt.savefig(f"rdf.png")
-    st.plotly_chart(fig, use_container_width=True)
-    with open('rdf.png', 'rb') as file:
-        st.download_button(label = 'Download the graph', data = file, file_name = 'rdf.png', mime = 'image/png')
+        btn = st.button('Calculater')
+        if btn:
+            actual_rdf = cal_rdf(X_0, X_1, X_2, X_3/(1000), X_4)
+            X_5 = actual_rdf.T.iloc[0]
+            #load model
+            loaded_rf = joblib.load("my_rf.pkl")
+                
+            X = []
+            for j in range (len(X_5)):
+                X.append([X_0, X_1, X_2, X_3/(1000), X_4])
+        
+            X = pd.DataFrame(X)
+            X['r/sigma'] = X_5
+        
+            X = np.array(X)
+            rdf_predict = loaded_rf.predict(X)
+            
+            rdf = pd.DataFrame({'r/sigma': actual_rdf.T.iloc[0], 'Actual RDF' : actual_rdf.T.iloc[1], 'Predicted RDF': rdf_predict})
+        
+            st.subheader('RDF of polymer')
+            st.dataframe(rdf)
+        
+            @st.cache_data 
+            def convert_df(df):
+                return df.to_csv(index=False).encode('utf-8')
+            
+            csv = convert_df(rdf)
+            st.download_button(label = 'Download predict rdf', data = csv, file_name = 'rdf.csv', mime = 'text/csv', key = 'download-csv')
+        
+            st.subheader('Plot RDF')
+            fig, ax = plt.subplots(figsize=(4,4))
+            plt.plot(rdf.T.iloc[0], rdf.T.iloc[1], 'cyan', linestyle='-', linewidth=2, marker='', label=f'Actual RDF')
+            plt.plot(rdf.T.iloc[0], rdf.T.iloc[2],'r', linestyle='--', linewidth=2, marker='', label=f'Predicted RDF')
+        
+            ax = plt.gca()
+            ax.set_xlim([1,10])
+            #ax.set_ylim([-1,15])
+            plt.tick_params(direction = 'in')
+        
+            plt.xlabel(r'r/sigma')
+            plt.ylabel('g(r)')
+        
+            #chú thích
+            legend = plt.legend(title='', loc='best')
+            legend.get_title().set_multialignment('center')
+            plt.savefig(f"rdf.png")
+            st.plotly_chart(fig, use_container_width=True)
+            with open('rdf.png', 'rb') as file:
+                st.download_button(label = 'Download the graph', data = file, file_name = 'rdf.png', mime = 'image/png')
