@@ -143,8 +143,8 @@ if btn:
     plt.plot(rdf.T.iloc[0], rdf.T.iloc[2],'r', linestyle='--', linewidth=2, marker='', label=f'Predicted RDF')
 
     ax = plt.gca()
-    ax.set_xlim([1,15])
-    ax.set_ylim([-1,10])
+    ax.set_xlim([1,10])
+    ax.set_ylim([-1,15])
     plt.tick_params(direction = 'in')
 
     plt.xlabel(r'$r/\sigma$')
