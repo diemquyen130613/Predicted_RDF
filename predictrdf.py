@@ -38,7 +38,7 @@ def cal_rdf (x0, x1, x2, x3, x4):
     sys.density['particle'] = phi*eta/sys.diameter.volume['particle']
     print('--> rho=',sys.density['polymer'],sys.density['particle'])
     
-    sys.omega['polymer','polymer'] = pyPRISM.omega.FreelyJointedChain(length=N,l=4.0*d/3.0)
+    sys.omega['polymer','polymer'] = pyPRISM.omega.FreelyJointedChain(length=N,l=2.5*(D+d)/2)
     sys.omega['polymer','particle'] = pyPRISM.omega.InterMolecular()
     sys.omega['particle','particle'] = pyPRISM.omega.SingleSite()
     
@@ -64,7 +64,7 @@ def cal_rdf (x0, x1, x2, x3, x4):
     sys.density['polymer'] = (1-phi)*eta/sys.diameter.volume['polymer']
     sys.density['particle'] = phi*eta/sys.diameter.volume['particle']
     
-    sys.omega['polymer','polymer'] = pyPRISM.omega.FreelyJointedChain(length=N,l=4.0*d/3.0)
+    sys.omega['polymer','polymer'] = pyPRISM.omega.FreelyJointedChain(length=N,l=2.5*(D+d)/2)
     sys.omega['polymer','particle'] = pyPRISM.omega.NoIntra()
     sys.omega['particle','particle'] = pyPRISM.omega.SingleSite()
     
@@ -101,8 +101,8 @@ st.header('Prediction')
 st.subheader('Select parameters')
 col0, col1, col2, col3 = st.columns([1, 1, 2, 1])
 with col0:
-    X_0 = st.number_input('NP-P: 0.4 -> 1.5', 0.4, 1.5)
-    X_1 = st.number_input('NP-NP: 0.4 -> 1.5', 0.4, 1.5)
+    X_0 = st.number_input('NP-P: 0.1 -> 1.5', 0.1, 1.5)
+    X_1 = st.number_input('NP-NP: 0.1 -> 1.5', 0.1, 1.5)
     X_2 = st.number_input('D: 2 -> 5', 2, 5)
     X_3 = st.number_input('Phi*$10^{-3}$: 1 -> 5', 1, 5)
     X_4 = st.number_input('N: 25 -> 40', 25, 40)
