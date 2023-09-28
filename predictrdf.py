@@ -102,7 +102,7 @@ st.sidebar.header('Prediction')
 st.header('Prediction')
 st.sidebar.subheader('Select parameters')
 st.subheader('Select parameters')
-col0, col1 = st.columns([1, 4])
+col0, col1 = st.columns([1, 2])
 with col0:
     X_0 = st.number_input('NP-polymers', 0.3, 1.5)
     X_1 = st.number_input('NP-NP', 0.3, 1.5)
