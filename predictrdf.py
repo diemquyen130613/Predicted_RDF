@@ -102,17 +102,15 @@ st.sidebar.header('Prediction')
 st.header('Prediction')
 st.sidebar.subheader('Select parameters')
 st.subheader('Select parameters')
-st.sidebar.subheader('Select parameters')
 col0, col1, col2, col3, col4 = st.columns(5)
 with col0:
-    X_0 = st.number_input('NP-polymers', 0.1, 1.5)
-    X_1 = st.number_input('NP-NP', 0.1, 1.5)
+    X_0 = st.number_input('NP-polymers', 0.2, 1.5)
+    X_1 = st.number_input('NP-NP', 0.2, 1.5)
     X_2 = st.number_input('D', 2, 5)
     X_3 = st.number_input('$Phi*10^{-3}$', 1, 5)
     X_4 = st.number_input('N', 25, 40)
     
 btn = st.button('Calculater')
-st.sidebar.button('Calculater')
 if btn:
     actual_rdf = cal_rdf(X_0, X_1, X_2, X_3/(1000), X_4)
     X_5 = actual_rdf.T.iloc[0]
@@ -131,7 +129,7 @@ if btn:
     
     rdf = pd.DataFrame({'r/sigma': actual_rdf.T.iloc[0], 'Actual RDF' : actual_rdf.T.iloc[1], 'Predicted RDF': rdf_predict})
 
-    st.subheader('Predict RDF of polymer')
+    st.subheader('RDF of polymer')
     st.dataframe(rdf)
 
     @st.cache_data 
@@ -141,7 +139,7 @@ if btn:
     csv = convert_df(rdf)
     st.download_button(label = 'Download predict rdf', data = csv, file_name = 'rdf.csv', mime = 'text/csv', key = 'download-csv')
 
-    st.header('Plot RDF')
+    st.subheader('Plot RDF')
     fig, ax = plt.subplots(figsize=(4,4))
     plt.plot(rdf.T.iloc[0], rdf.T.iloc[1], 'cyan', linestyle='-', linewidth=2, marker='', label=f'Actual RDF')
     plt.plot(rdf.T.iloc[0], rdf.T.iloc[2],'r', linestyle='--', linewidth=2, marker='', label=f'Predicted RDF')
